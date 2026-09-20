@@ -24,11 +24,6 @@ namespace lab1
             enemyIcons = new List<EnemyIcon>();
         }
 
-
-        // ==========================================
-        // ЗАГРУЗКА ИКОНОК ИЗ ПАПКИ
-        // ==========================================
-
         private void LoadIconsButton_Click(
             object sender,
             RoutedEventArgs e)
@@ -57,7 +52,6 @@ namespace lab1
 
             foreach (string file in files)
             {
-                // Проверяем расширение без учёта регистра
                 if (Path.GetExtension(file).Equals(
                     ".png",
                     StringComparison.OrdinalIgnoreCase) == false)
@@ -78,13 +72,10 @@ namespace lab1
 
                 bitmap.BeginInit();
 
-                // Путь к файлу
                 bitmap.UriSource = new Uri(file);
 
-                // Сразу уменьшаем большое изображение
                 bitmap.DecodePixelWidth = 64;
 
-                // Полностью загрузить изображение сейчас
                 bitmap.CacheOption = BitmapCacheOption.OnLoad;
 
                 bitmap.EndInit();
@@ -98,11 +89,6 @@ namespace lab1
                 IconsListBox.Items.Add(image);
             }
         }
-
-
-        // ==========================================
-        // ВЫБОР ИКОНКИ
-        // ==========================================
 
         private void IconsListBox_SelectionChanged(
             object sender,
@@ -134,11 +120,6 @@ namespace lab1
                     selectedImage.Source;
             }
         }
-
-
-        // ==========================================
-        // ДОБАВЛЕНИЕ ПРОТИВНИКА
-        // ==========================================
 
         private void AddEnemyButton_Click(
             object sender,
@@ -190,11 +171,6 @@ namespace lab1
                 EnemyListBox.Items.Count - 1;
         }
 
-
-        // ==========================================
-        // ИЗМЕНЕНИЕ ПРОТИВНИКА
-        // ==========================================
-
         private void EditEnemyButton_Click(
     object sender,
     RoutedEventArgs e)
@@ -244,11 +220,6 @@ namespace lab1
             ShowEnemyIcon(iconName);
         }
 
-
-        // ==========================================
-        // УДАЛЕНИЕ ПРОТИВНИКА
-        // ==========================================
-
         private void DeleteEnemyButton_Click(
             object sender,
             RoutedEventArgs e)
@@ -270,11 +241,6 @@ namespace lab1
 
             ClearEnemyFields();
         }
-
-
-        // ==========================================
-        // ВЫБОР ПРОТИВНИКА
-        // ==========================================
 
         private void EnemyListBox_SelectionChanged(
             object sender,
@@ -320,11 +286,6 @@ namespace lab1
             ShowEnemyIcon(enemy.IconName);
         }
 
-
-        // ==========================================
-        // ПОКАЗ ИКОНКИ
-        // ==========================================
-
         private void ShowEnemyIcon(string iconName)
         {
             MainEnemyIcon.Source = null;
@@ -342,11 +303,6 @@ namespace lab1
             }
         }
 
-
-        // ==========================================
-        // ОБНОВЛЕНИЕ СПИСКА ПРОТИВНИКОВ
-        // ==========================================
-
         private void RefreshEnemyList()
         {
             EnemyListBox.Items.Clear();
@@ -360,11 +316,6 @@ namespace lab1
             }
         }
 
-
-        // ==========================================
-        // ЧТЕНИЕ ДАННЫХ ИЗ ПОЛЕЙ
-        // ==========================================
-
         private bool ReadEnemyData(
             out string name,
             out string iconName,
@@ -374,7 +325,6 @@ namespace lab1
             out double goldModifier,
             out double spawnChance)
         {
-            // Сначала задаём начальные значения
             name = NameTextBox.Text;
             iconName = IconNameTextBox.Text;
 
@@ -384,8 +334,6 @@ namespace lab1
             goldModifier = 0;
             spawnChance = 0;
 
-
-            // Base Life
             if (!int.TryParse(
                 BaseLifeTextBox.Text,
                 out baseLife))
@@ -396,8 +344,6 @@ namespace lab1
                 return false;
             }
 
-
-            // Life Modifier
             if (!double.TryParse(
                 LifeModifierTextBox.Text,
                 out lifeModifier))
@@ -408,8 +354,6 @@ namespace lab1
                 return false;
             }
 
-
-            // Base Gold
             if (!int.TryParse(
                 BaseGoldTextBox.Text,
                 out baseGold))
@@ -420,8 +364,6 @@ namespace lab1
                 return false;
             }
 
-
-            // Gold Modifier
             if (!double.TryParse(
                 GoldModifierTextBox.Text,
                 out goldModifier))
@@ -432,8 +374,6 @@ namespace lab1
                 return false;
             }
 
-
-            // Spawn Chance
             if (!double.TryParse(
                 SpawnChanceTextBox.Text,
                 out spawnChance))
@@ -446,11 +386,6 @@ namespace lab1
 
             return true;
         }
-
-
-        // ==========================================
-        // ОЧИСТКА ПОЛЕЙ
-        // ==========================================
 
         private void ClearEnemyFields()
         {
@@ -467,11 +402,6 @@ namespace lab1
 
             MainEnemyIcon.Source = null;
         }
-
-
-        // ==========================================
-        // СОХРАНЕНИЕ JSON
-        // ==========================================
 
         private void SaveJsonButton_Click(
             object sender,
@@ -497,11 +427,6 @@ namespace lab1
                     "Список противников сохранён.");
             }
         }
-
-
-        // ==========================================
-        // ЗАГРУЗКА JSON
-        // ==========================================
 
         private void LoadJsonButton_Click(
             object sender,
