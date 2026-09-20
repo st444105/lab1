@@ -141,5 +141,32 @@ namespace lab1.Models
                     spawnChance);
             }
         }
+
+        public void EditEnemyByIndex(
+            int id,
+            string name,
+            string iconName,
+            int baseLife,
+            double lifeModifier,
+            int baseGold,
+            double goldModifier,
+            double spawnChance)
+        {
+            if (id < 0 || id >= enemies.Count)
+            {
+                return;
+            }
+
+            CEnemyTemplate enemy = new CEnemyTemplate(
+                name,
+                iconName,
+                baseLife,
+                lifeModifier,
+                baseGold,
+                goldModifier,
+                spawnChance);
+
+            enemies[id] = enemy;
+        }
     }
 }
